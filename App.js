@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Test from "./src/Test";
-import HelloWorld from "./src/HelloWorld";
+import Card from "./components/Card";
 import 'react-native-url-polyfill/auto'
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "native-base";
 import { supabase } from "./src/supabase"
-import { NativeBaseProvider } from "native-base";
+import { Box, NativeBaseProvider, Center } from "native-base";
 
 export default function App() {
 
@@ -21,11 +23,16 @@ export default function App() {
 
     return (
         <NativeBaseProvider>
-            <View>
-                <Test />
-                <HelloWorld />
-                <Text></Text>
-            </View>
+            <StatusBar barStyle="light-content" />
+                <Box h="100%" w="100%" bg="dark.50">
+                    <SafeAreaView>
+                        <Center>
+                            {/* <Box h="95%" w="95%" bg="grey" borderRadius="md" shadow="3" mt="8%"> */}
+                            <Test />
+                        </Center>
+                    </SafeAreaView>
+                </Box>
+                
         </NativeBaseProvider>
     );
 }

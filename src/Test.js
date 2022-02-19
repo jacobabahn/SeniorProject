@@ -1,7 +1,9 @@
-import { View, Text} from "react-native"
+import { View, Text, FlatList, StyleSheet} from "react-native"
 import { useState, useEffect } from "react"
+import Card from "../components/Card"
 // Initialize the JS client
 import { supabase } from "./supabase"
+import { Center, Box } from "native-base"
 
 const Test = () => {
     const [tdata, setTData] = useState([])
@@ -18,13 +20,22 @@ const Test = () => {
         setTData(test)
     }
 
+    const Item = ({ item }) => (
+        <Card title={item.title} description="This is a description... testing 1 2 3" />
+    )
+    
     return (
-        <View>
-            {tdata.map((item, index) => (
-                <Text key={index}>{item.title}</Text>
-            ))}
-        </View>
+        <Box h="100%" w="100%">
+            <FlatList style={styles.flatList} data={tdata} renderItem={Item} /> 
+        </Box>
     )
 }
+
+const styles = StyleSheet.create({
+    flatList: {
+        height: "100%",
+        width: "100%",
+    }
+})
 
 export default Test
