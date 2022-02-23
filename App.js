@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Test from "./src/Test";
-import Card from "./components/Card";
+import Card from "./components/SessionCard";
 import 'react-native-url-polyfill/auto'
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "native-base";
 import { supabase } from "./src/supabase"
 import { Box, NativeBaseProvider, Center } from "native-base";
+import Pomodoro from "./src/Pomodoro";
 
 export default function App() {
 
@@ -27,8 +28,8 @@ export default function App() {
                 <Box h="100%" w="100%" bg="dark.50">
                     <SafeAreaView>
                         <Center>
-                            {/* <Box h="95%" w="95%" bg="grey" borderRadius="md" shadow="3" mt="8%"> */}
-                            <Test />
+                            {/* <Test /> */}
+                            <Pomodoro />
                         </Center>
                     </SafeAreaView>
                 </Box>

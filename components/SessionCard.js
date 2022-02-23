@@ -16,7 +16,7 @@ const Card = (props) => {
         </Center>
     )
 }
-7
+
 const styles = StyleSheet.create({
     body: {
         flexDirection: "row",
