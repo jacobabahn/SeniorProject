@@ -5,7 +5,7 @@ import Card from "../components/SessionCard"
 import { supabase } from "./supabase"
 import { Center, Box, Text, Divider } from "native-base"
 
-const Test = () => {
+const ViewSessions = () => {
     const [tdata, setTData] = useState([])
     
     useEffect(() => {
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Test
+export default ViewSessions
