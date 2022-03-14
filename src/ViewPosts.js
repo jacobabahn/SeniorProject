@@ -1,12 +1,12 @@
 import { View, FlatList, StyleSheet} from "react-native"
 import { useState, useEffect } from "react"
-import Card from "../components/SessionCard"
+import Card from "../components/PostCard"
 // Initialize the JS client
 import { supabase } from "./supabase"
 import { Center, Box, Text, Divider } from "native-base"
 
-const ViewSessions = () => {
-    const [sessionData, setSessionData] = useState()
+const ViewPosts = () => {
+    const [postData, setPostData] = useState()
     
     useEffect(() => {
         getData()
@@ -16,8 +16,7 @@ const ViewSessions = () => {
         let { data: Session, error } = await supabase
             .from('Session')
             .select('*')
-        
-        setSessionData(Session)
+        setPostData(Session)
     }
 
     const Item = ({ item }) => (
@@ -36,10 +35,10 @@ const ViewSessions = () => {
     return (
         <Box h="100%" w="100%">
             <Center>
-                <Text color="dark.600" fontSize="3xl" pt="4" pb="2">Your Sessions</Text>
+                <Text color="dark.600" fontSize="3xl" pt="4" pb="2">Posts</Text>
                 <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />
             </Center>
-            <FlatList style={styles.flatList} data={sessionData} renderItem={Item} />
+            <FlatList style={styles.flatList} data={postData} renderItem={Item} />
         </Box>
     )
 }
@@ -51,4 +50,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ViewSessions
+export default ViewPosts

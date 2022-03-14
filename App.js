@@ -1,15 +1,17 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native"
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import * as React from 'react'
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import ViewSessions from "./src/ViewSessions";
+import ViewSessions from "./src/ViewSessions"
 import 'react-native-url-polyfill/auto'
-import { SafeAreaView } from "react-native-safe-area-context";
-import { StatusBar } from "native-base";
+import { SafeAreaView } from "react-native-safe-area-context"
+import { StatusBar } from "native-base"
 import { supabase } from "./src/supabase"
-import { Box, NativeBaseProvider, Center } from "native-base";
-import Pomodoro from "./src/Pomodoro";
+import { Box, NativeBaseProvider, Center } from "native-base"
+import Pomodoro from "./src/Pomodoro"
+import ViewPosts from "./src/ViewPosts"
+import ViewSession from "./src/ViewSession"
 
 const Stack = createNativeStackNavigator()
 
@@ -37,8 +39,10 @@ export default function App() {
                                         <Stack.Screen name="Sessions" component={ViewSessions} /> 
                                         <Stack.Screen name="Pomodoro" component={Pomodoro} />
                                     </Stack.Navigator>
+                                {/* <ViewPosts /> */}
                                 {/* <Pomodoro /> */}
-                                <ViewSessions />
+                                {/* <ViewSessions /> */}
+                                <ViewSession />
                             </Center>
                         </SafeAreaView>
                     </Box>

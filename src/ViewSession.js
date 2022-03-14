@@ -5,7 +5,7 @@ import Card from "../components/SessionCard"
 import { supabase } from "./supabase"
 import { Center, Box, Text, Divider } from "native-base"
 
-const ViewSessions = () => {
+const ViewSession = () => {
     const [sessionData, setSessionData] = useState()
     
     useEffect(() => {
@@ -16,13 +16,9 @@ const ViewSessions = () => {
         let { data: Session, error } = await supabase
             .from('Session')
             .select('*')
-        
+            .eq('id', '2')
         setSessionData(Session)
     }
-
-    const Item = ({ item }) => (
-        <Card title={item.title} description={item.description} duration={handleTime(item.duration)} />
-    )
 
     const handleTime = (time) => {
         let hours = Math.floor(time / 60)
@@ -34,12 +30,16 @@ const ViewSessions = () => {
     }
     
     return (
-        <Box h="100%" w="100%">
+        console.log(sessionData),
+        <Box h="100%" w="90%">
             <Center>
-                <Text color="dark.600" fontSize="3xl" pt="4" pb="2">Your Sessions</Text>
-                <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />
+                <Text color="dark.600" fontSize="3xl" pt="4" pb="2">{sessionData[0].title}</Text>
+                <Divider bg="dark.400" variant="horizontal" w="100%" m="1" thickness="0.5" />
             </Center>
-            <FlatList style={styles.flatList} data={sessionData} renderItem={Item} />
+            <Text color="dark.500" fontSize="xl" pt="2" pb="1">Description:</Text>
+            <Text color="dark.500" fontSize="lg" mx="0.5" mt="0.5">{sessionData[0].description}</Text>
+            <Divider bg="dark.400" variant="horizontal" w="100%" m="1" thickness="0.5" />
+
         </Box>
     )
 }
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ViewSessions
+export default ViewSession
