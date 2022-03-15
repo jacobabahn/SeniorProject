@@ -34,7 +34,7 @@ const ViewSessions = () => {
     }
     
     return (
-        <Box h="100%" w="100%">
+        <Box h="100%" w="100%" bg="dark.50">
             <Center>
                 <Text color="dark.600" fontSize="3xl" pt="4" pb="2">Your Sessions</Text>
                 <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />

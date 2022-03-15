@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Box, Text, Button, Progress, Center } from "native-base"
 import { StyleSheet } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
 
 
 const Pomodoro = () => {
@@ -86,9 +87,9 @@ const Pomodoro = () => {
     }
 
     return (
-        <Box h="100%" w="100%">
-            { time === 0 && isStarted.current ? handleReset() : handlePomodoroStart() }
-        </Box>
+            <Box h="100%" w="100%" bg="dark.50">
+                { time === 0 && isStarted.current ? handleReset() : handlePomodoroStart() }
+            </Box>
     )
         
 }
@@ -102,7 +103,7 @@ const style = StyleSheet.create({
     },
     time: {
         fontVariant: ["tabular-nums"], 
-    }
+    },
 })
 
 export default Pomodoro
