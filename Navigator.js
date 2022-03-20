@@ -1,34 +1,35 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import Pomodoro from "./src/Pomodoro"
 import ViewPosts from "./src/ViewPosts"
 import ViewSession from "./src/ViewSession"
 import ViewSessions from "./src/ViewSessions"
 
-const Tab = createBottomTabNavigator()
+const Tab = createMaterialTopTabNavigator()
 
 const Navigator = () => {
     return (
         <NavigationContainer>
-            <Tab.Navigator 
+            <Tab.Navigator
+                tabBarPosition="bottom"
                 initialRouteName="Pomodoro"
                 swipeEnabled="true"
                 navigationOptions={{
-                    swipeEnabled: true,
+                    // swipeEnabled: true,
                 }}
                 screenOptions={{
                     headerShown: false,
-                    swipeEnabled: true,
-                    // tabBarLabel: { focused: true, color: "#006ba7" },
+                    // swipeEnabled: true,
                     tabBarStyle: {
                         poition: "absolute",
                         bottom: 25,
                         elevation: 0,
                         borderRadius: 15,
-                        left: "17.5%",
+                        left: "13%",
                         height: 70,
-                        width: "65%",
+                        width: "74%",
                         backgroundColor: "#27272a",
                         borderTopWidth: 0,
                     },
@@ -36,11 +37,22 @@ const Navigator = () => {
                     tabBarLabelStyle: { 
                         fontSize: 14,
                         justifyContent: "center",
+                        marginTop: 15,
                     },
+                    
+                }}
+                tabBarOptions={{
+                    activeTintColor: "#006ba7",
+                    inactiveTintColor: "white",
+                    indicatorStyle: {
+                        backgroundColor: "#006ba7",
+                        width: "22%",
+                        marginLeft: "4.5%",
+                    }
                 }}
                 >
                 <Tab.Screen name="Sessions" component={ViewSessions} />
-                <Tab.Screen name="Pomodoro" component={Pomodoro} />
+                <Tab.Screen name="Timer" component={Pomodoro} />
                 <Tab.Screen name="Feed" component={ViewPosts} />
             </Tab.Navigator>
         </NavigationContainer>
