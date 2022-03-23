@@ -2,7 +2,7 @@ import { View, FlatList, StyleSheet} from "react-native"
 import { useState, useEffect } from "react"
 import Card from "../components/PostCard"
 // Initialize the JS client
-import { supabase } from "./supabase"
+import { supabase } from "../utils/supabase"
 import { Center, Box, Text, Divider } from "native-base"
 
 const ViewPosts = () => {

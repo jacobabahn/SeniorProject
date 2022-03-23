@@ -2,7 +2,7 @@ import { View, FlatList, StyleSheet} from "react-native"
 import { useState, useEffect } from "react"
 import Card from "../components/SessionCard"
 // Initialize the JS client
-import { supabase } from "./supabase"
+import { supabase } from "../utils/supabase"
 import { Center, Box, Text, Divider, Button } from "native-base"
 // import { ItemClick } from "native-base/lib/typescript/components/composites/Typeahead/useTypeahead/types"
 

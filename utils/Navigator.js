@@ -2,10 +2,10 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import Pomodoro from "./src/Pomodoro"
-import ViewPosts from "./src/ViewPosts"
-import ViewSession from "./src/ViewSession"
-import ViewSessions from "./src/ViewSessions"
+import Pomodoro from "../src/Pomodoro"
+import ViewPosts from "../src/ViewPosts"
+import ViewSession from "../src/ViewSession"
+import ViewSessions from "../src/ViewSessions"
 
 const Tab = createMaterialTopTabNavigator()
 
@@ -15,13 +15,10 @@ const Navigator = () => {
             <Tab.Navigator
                 tabBarPosition="bottom"
                 initialRouteName="Pomodoro"
-                swipeEnabled="true"
                 navigationOptions={{
-                    // swipeEnabled: true,
                 }}
                 screenOptions={{
                     headerShown: false,
-                    // swipeEnabled: true,
                     tabBarStyle: {
                         poition: "absolute",
                         bottom: 25,
@@ -39,17 +36,15 @@ const Navigator = () => {
                         justifyContent: "center",
                         marginTop: 15,
                     },
+                    tabBarActiveTintColor: "#006ba7",
+                    tabBarInactiveTintColor: "white",
+                    tabBarIndicatorStyle: {
+                    backgroundColor: "#006ba7",
+                    width: "22%",
+                    marginLeft: "4.5%"
                     
-                }}
-                tabBarOptions={{
-                    activeTintColor: "#006ba7",
-                    inactiveTintColor: "white",
-                    indicatorStyle: {
-                        backgroundColor: "#006ba7",
-                        width: "22%",
-                        marginLeft: "4.5%",
-                    }
-                }}
+                    }}
+                }
                 >
                 <Tab.Screen name="Sessions" component={ViewSessions} />
                 <Tab.Screen name="Timer" component={Pomodoro} />
