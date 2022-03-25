@@ -3,8 +3,10 @@ import { useState, useEffect, useContext } from "react"
 import Card from "../components/SessionCard"
 // Initialize the JS client
 import { supabase } from "../utils/supabase"
-import { Center, Box, Text, Divider } from "native-base"
+import { Center, Box, Text, Divider, Pressable } from "native-base"
 import { UserContext } from "../App"
+import { TouchableOpacity } from "react-native-web"
+import ViewSession from "./ViewSession"
 
 const ViewSessions = () => {
     const [sessionData, setSessionData] = useState()
@@ -26,6 +28,10 @@ const ViewSessions = () => {
     const Item = ({ item }) => (
         <Card title={item.title} description={item.description} duration={handleTime(item.duration)} />
     )
+
+    const handlePress = () => {
+        
+    }
 
     const handleTime = (time) => {
         let hours = Math.floor(time / 60)

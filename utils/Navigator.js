@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import Pomodoro from "../src/Pomodoro"
 import ViewPosts from "../src/ViewPosts"
-import ViewSession from "../src/ViewSession"
 import ViewSessions from "../src/ViewSessions"
 
 const Tab = createMaterialTopTabNavigator()
