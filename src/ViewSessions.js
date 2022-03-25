@@ -1,12 +1,14 @@
 import { View, FlatList, StyleSheet} from "react-native"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import Card from "../components/SessionCard"
 // Initialize the JS client
 import { supabase } from "../utils/supabase"
 import { Center, Box, Text, Divider } from "native-base"
+import { UserContext } from "../App"
 
 const ViewSessions = () => {
     const [sessionData, setSessionData] = useState()
+    const userSession = useContext(UserContext)
     
     useEffect(() => {
         getData()
@@ -16,6 +18,7 @@ const ViewSessions = () => {
         let { data: Session, error } = await supabase
             .from('Session')
             .select('*')
+            .eq('user_id', userSession.user.id)
         
         setSessionData(Session)
     }

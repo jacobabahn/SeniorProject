@@ -1,11 +1,9 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useContext } from "react"
 import { Box, Text, Button, Progress, Center } from "native-base"
 import { StyleSheet } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
-
 
 const Pomodoro = () => {
-    const defaulTime = useRef(25 * 60)
+    const defaulTime = useRef(2 * 60)
     const breakTime = useRef(5 * 60)
     const isStarted = useRef(false)
     const isBreak = useRef(false)

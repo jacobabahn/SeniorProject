@@ -1,6 +1,5 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import Pomodoro from "../src/Pomodoro"
 import ViewPosts from "../src/ViewPosts"
@@ -42,7 +41,6 @@ const Navigator = () => {
                     backgroundColor: "#006ba7",
                     width: "22%",
                     marginLeft: "4.5%"
-                    
                     }}
                 }
                 >

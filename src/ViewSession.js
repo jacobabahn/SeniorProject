@@ -4,7 +4,6 @@ import Card from "../components/SessionCard"
 // Initialize the JS client
 import { supabase } from "../utils/supabase"
 import { Center, Box, Text, Divider, Button } from "native-base"
-// import { ItemClick } from "native-base/lib/typescript/components/composites/Typeahead/useTypeahead/types"
 
 const ViewSession = () => {
     const [sessionData, setSessionData] = useState()
@@ -17,7 +16,7 @@ const ViewSession = () => {
         let { data: Session, error } = await supabase
             .from('Session')
             .select('*')
-            .eq('id', '2')
+            .eq('id', {id})
         setSessionData(Session)
         sessionData[0].duration = handleTime(sessionData[0].duration)
     }
