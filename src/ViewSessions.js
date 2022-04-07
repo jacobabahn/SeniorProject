@@ -1,16 +1,17 @@
-import { View, FlatList, StyleSheet} from "react-native"
+import { View, FlatList, StyleSheet, TouchableOpacity} from "react-native"
 import { useState, useEffect, useContext } from "react"
 import Card from "../components/SessionCard"
 // Initialize the JS client
 import { supabase } from "../utils/supabase"
-import { Center, Box, Text, Divider, Pressable } from "native-base"
+import { Center, Box, Text, Divider, Pressable, Button } from "native-base"
 import { UserContext } from "../App"
-import { TouchableOpacity } from "react-native-web"
 import ViewSession from "./ViewSession"
+import { useNavigation } from "@react-navigation/native"
 
 const ViewSessions = () => {
     const [sessionData, setSessionData] = useState()
     const userSession = useContext(UserContext)
+    const navigation = useNavigation()
     
     useEffect(() => {
         getData()
@@ -26,11 +27,19 @@ const ViewSessions = () => {
     }
 
     const Item = ({ item }) => (
-        <Card title={item.title} description={item.description} duration={handleTime(item.duration)} />
+        <TouchableOpacity onPress={() => handlePress(item.id)}>
+            <Card title={item.title} description={item.description} duration={handleTime(item.duration)} onPress={handlePress}/>
+        </TouchableOpacity>
     )
 
-    const handlePress = () => {
-        
+    const handlePress = (id) => {
+        return (
+            navigation.navigate("ViewSession", { id: id })
+        )
+    }
+
+    const logOut = () => {
+        supabase.auth.signOut()
     }
 
     const handleTime = (time) => {
@@ -49,6 +58,7 @@ const ViewSessions = () => {
                 <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />
             </Center>
             <FlatList style={styles.flatList} data={sessionData} renderItem={Item} />
+            <Button mb="12" onPress={logOut}>Log Out</Button>
         </Box>
     )
 }

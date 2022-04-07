@@ -1,15 +1,19 @@
 import { useEffect, useRef, useState, useContext } from "react"
-import { Box, Text, Button, Progress, Center } from "native-base"
+import { Box, Text, Button, Progress, Center, AlertDialog } from "native-base"
 import { StyleSheet } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 
 const Pomodoro = () => {
-    const defaulTime = useRef(2 * 60)
+    const defaulTime = useRef(25 * 60)
     const breakTime = useRef(5 * 60)
     const isStarted = useRef(false)
     const isBreak = useRef(false)
     const [time, setTime] = useState(defaulTime.current)
     const [startMin, setStartMin] = useState(Math.floor(time / 60))
     const [isRunning, setIsRunning] = useState()
+    const [isOpen, setIsOpen] = useState(true)
+    const navigation = useNavigation()
+    
 
         useEffect(() => {
             const interval = setInterval(() => {
@@ -40,7 +44,7 @@ const Pomodoro = () => {
             return (
                 <Box mt="60%">
                     <Center>
-                        <Button m="3" bg="info.700" rounded="2xl" w="70%" onPress={handleBreakStart}>Start Break</Button>
+                        <Button m="3" mt="3" bg="info.700" rounded="2xl" w="70%" onPress={handleBreakStart}>Start Break</Button>
                         <Button m="3" bg="info.700" rounded="2xl" w="70%" onPress={() => setTime(defaulTime.current)}>Restart Timer</Button>
                     </Center>
                 </Box>
@@ -69,6 +73,32 @@ const Pomodoro = () => {
         )
     }
 
+    const handleEndSession = () => {
+        return (
+            navigation.navigate("CreateSession")
+            // <AlertDialog isOpen={isOpen} onClose={() => setIsOpen(!isOpen)} >
+            //     <AlertDialog.Content>
+            //         <AlertDialog.CloseButton />
+            //         <AlertDialog.Header>Delete Customer</AlertDialog.Header>
+            //         <AlertDialog.Body>
+            //             This will remove all data relating to Alex. This action cannot be
+            //             reversed. Deleted data can not be recovered.
+            //         </AlertDialog.Body>
+            //         <AlertDialog.Footer>
+            //             <Button.Group space={2}>
+            //             <Button variant="unstyled" colorScheme="coolGray" onPress={() => setIsOpen(!isOpen)}>
+            //                 Cancel
+            //             </Button>
+            //             <Button colorScheme="danger" onPress={() => setIsOpen(!isOpen)}>
+            //                 End
+            //             </Button>
+            //             </Button.Group>
+            //         </AlertDialog.Footer>
+            //         </AlertDialog.Content>
+            // </AlertDialog>
+        )
+    }
+
     const handlePomodoroStart = () => {
         return (
             <Box h="100%" w="100%">
@@ -77,8 +107,11 @@ const Pomodoro = () => {
                 </Center>
                 <Progress colorScheme="info" size="lg" m="6" value={Math.abs(100 - (time / (startMin * 60) * 100))} />
                 <Box style={style.buttons}>
-                    {!isRunning || !isStarted.current ? <Button bg="info.700" rounded="2xl" w="30%" onPress={handleButton}>Start</Button> :
-                                                        <Button bg="info.700" rounded="2xl" w="30%" onPress={handleButton}>Pause</Button>}
+                    {!isRunning || !isStarted.current ? <Center w="100%">
+                                                            <Button bg="info.700" m="6" rounded="2xl" w="30%" onPress={handleButton}>Start</Button> 
+                                                            <Button bg="info.700" rounded="2xl" w="30%" onPress={handleEndSession}>End Session</Button>
+                                                        </Center> :
+                                                        <Button bg="info.700" m="6" rounded="2xl" w="30%" onPress={handleButton}>Pause</Button>}
                 </Box>
             </Box>
         )
@@ -100,7 +133,7 @@ const style = StyleSheet.create({
         marginTop: "10%"
     },
     time: {
-        fontVariant: ["tabular-nums"], 
+        fontVariant: ["tabular-nums"],
     },
 })
 

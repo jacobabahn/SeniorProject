@@ -7,8 +7,6 @@ import { supabase } from "./utils/supabase"
 import { Box, NativeBaseProvider, Center } from "native-base"
 import Navigator from './utils/Navigator';
 import Auth from './utils/Auth';
-import ViewSession from './src/ViewSession';
-import CreateSession from './src/CreateSession';
 
 export const UserContext = createContext(null)
 
@@ -28,9 +26,8 @@ export default function App() {
                 <StatusBar barStyle="light-content" />
                     <UserContext.Provider value={session}>
                         <Box h="100%" w="100%" bg="dark.50" safeArea>
-                            {/* <ViewSession /> */}
-                            <CreateSession />
-                            {/* {!session ? <Auth /> : <Navigator id={session.user.id} session={session} />} */}
+                            {/* <CreateSession /> */}
+                            {!session ? <Auth /> : <Navigator id={session.user.id} session={session} />}
                         </Box>
                     </UserContext.Provider>
             </NativeBaseProvider>

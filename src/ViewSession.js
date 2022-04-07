@@ -1,23 +1,27 @@
 import { View, FlatList, StyleSheet} from "react-native"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 // Initialize the JS client
 import { supabase } from "../utils/supabase"
 import { Center, Box, Text, Divider, Button } from "native-base"
 
-const ViewSession = () => {
+const ViewSession = ({route}) => {
     const [sessionData, setSessionData] = useState()
-    
+    const [isLoading, setIsLoading] = useState(true)
+    const id = route.params.id
+
     useEffect(() => {
         getData()
+        setIsLoading(false)
     }, [])
 
     const getData = async () => {
         let { data: Session, error } = await supabase
             .from('Session')
             .select('*')
-    
+            .eq('id', id)
+        
+        Session[0].duration = handleTime(Session[0].duration)
         setSessionData(Session)
-        sessionData[0].duration = handleTime(sessionData[0].duration)
     }
 
     const handleTime = (time) => {
@@ -28,15 +32,22 @@ const ViewSession = () => {
         
         return `${hours}:${minutes}`
     }
-    
+
+    if (!sessionData) {
+        return (
+            <Center style={styles.main}>
+                <Text>Loading...</Text>
+            </Center>
+        )
+    }
     return (
         <Center>
-            <Box h="100%" w="90%">
+            <Box h="100%" w="90%" style={styles.main}>
                 <Center>
                     <Text color="dark.600" fontSize="3xl" pt="4" pb="2">{sessionData[0].title}</Text>
                     <Divider bg="dark.400" variant="horizontal" w="100%" m="1" thickness="0.5" my="3" />
                 </Center>
-                <Text color="dark.500" fontSize="xl" pt="2" pb="1">Description:</Text>
+                <Text color="dark.500" fontSize="xl" pt="2" pb="1">Description: </Text>
                 <Text color="dark.500" fontSize="lg" mx="0.5" mt="0.5">{sessionData[0].description}</Text>
                 <Divider bg="dark.400" variant="horizontal" w="100%" m="1" thickness="0.5" mt="5" />
                 <Text color="dark.500" fontSize="xl" pt="2" pb="1">Duration: {sessionData[0].duration} </Text>
@@ -49,6 +60,11 @@ const ViewSession = () => {
 }
 
 const styles = StyleSheet.create({
+    main: {
+        backgroundColor: "#18181b",
+        height: "100%",
+        width: "100%",
+    },
     upload: {
         width: "25%",
         height: "6%",

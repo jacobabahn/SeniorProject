@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     paddingTop: 4,
     paddingBottom: 4,
     alignSelf: 'stretch',
+    color: 'white',
   },
   mt20: {
     marginTop: 20,
