@@ -9,14 +9,13 @@ const CreateSession = () => {
     const [description, setDescription] = useState("")
     const userSession = useContext(UserContext)
 
-    const handleUpload = async (name, description) => {
+    const handleUpload = async () => {
         console.log(name, description, userSession.user.id)
         const { data, error} = await supabase
             .from('Session')
-            .insert([{
-                title: name, description: description, duration: 0, user_id: userSession.user.id
-            }])
-
+            .insert(
+                { title: name, description: description, duration: 0, user_id: userSession.user.id }
+            )
     }
 
     return (
@@ -26,10 +25,10 @@ const CreateSession = () => {
                 <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />
             </Center>
 
-            <Input variant="outline" mx="3" my="10" h="11%" fontSize={23} borderColor="dark.400" color="white" placeholder="Session Name" value={name} onChange={(e) => setName(e.target.value)}/>
-            <TextArea mx="3" h="30%" fontSize={25} borderColor="dark.400" color="white" placeholder="Session Description" value={description} onChange={(e) => setDescription(e.target.value)}/>
+            <Input variant="outline" mx="3" my="10" h="11%" fontSize={23} borderColor="dark.400" color="white" placeholder="Session Name" value={name} onChangeText={(text) => setName(text)}/>
+            <TextArea mx="3" h="30%" fontSize={25} borderColor="dark.400" color="white" placeholder="Session Description" value={description} onChangeText={(text) => setDescription(text)}/>
             <Text mx="3" mt="10" fontSize={25} color="dark.500">Duration: 1:24</Text>
-            <Button style={styles.upload} mt="5" rounded="xl" bg="info.700" onPress={() => handleUpload({name}, {description})}>Upload</Button>
+            <Button style={styles.upload} mt="5" rounded="xl" bg="info.700" onPress={handleUpload}>Upload</Button>
         </Box>
     )
 }
