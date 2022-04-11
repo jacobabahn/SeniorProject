@@ -58,7 +58,7 @@ const ViewSessions = () => {
                 <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />
             </Center>
             <FlatList style={styles.flatList} data={sessionData} renderItem={Item} />
-            <Button mb="12" onPress={logOut}>Log Out</Button>
+            {/* <Button mb="12" onPress={logOut}>Log Out</Button> */}
         </Box>
     )
 }

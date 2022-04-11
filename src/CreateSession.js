@@ -10,7 +10,6 @@ const CreateSession = () => {
     const userSession = useContext(UserContext)
 
     const handleUpload = async () => {
-        console.log(name, description, userSession.user.id)
         const { data, error} = await supabase
             .from('Session')
             .insert(
