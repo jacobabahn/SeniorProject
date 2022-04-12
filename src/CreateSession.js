@@ -4,16 +4,17 @@ import { useState, useEffect, useContext } from "react"
 import { UserContext } from "../App"
 import { supabase } from "../utils/supabase"
 
-const CreateSession = () => {
+const CreateSession = ({ route }) => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const userSession = useContext(UserContext)
+    const time = route.params.time
 
     const handleUpload = async () => {
         const { data, error} = await supabase
             .from('Session')
             .insert(
-                { title: name, description: description, duration: 0, user_id: userSession.user.id }
+                { title: name, description: description, duration: time, user_id: userSession.user.id }
             )
     }
 
@@ -26,7 +27,7 @@ const CreateSession = () => {
 
             <Input variant="outline" mx="3" my="10" h="11%" fontSize={23} borderColor="dark.400" color="white" placeholder="Session Name" value={name} onChangeText={(text) => setName(text)}/>
             <TextArea mx="3" h="30%" fontSize={25} borderColor="dark.400" color="white" placeholder="Session Description" value={description} onChangeText={(text) => setDescription(text)}/>
-            <Text mx="3" mt="10" fontSize={25} color="dark.500">Duration: 1:24</Text>
+            <Text mx="3" mt="10" fontSize={25} color="dark.500">Duration: {time}</Text>
             <Button style={styles.upload} mt="5" rounded="xl" bg="info.700" onPress={handleUpload}>Upload</Button>
         </Box>
     )

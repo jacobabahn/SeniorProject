@@ -8,6 +8,7 @@ const Pomodoro = () => {
     const breakTime = useRef(5 * 60)
     const isStarted = useRef(false)
     const isBreak = useRef(false)
+    const totTime = useRef(0)
     const [time, setTime] = useState(defaulTime.current)
     const [startMin, setStartMin] = useState(Math.floor(time / 60))
     const [isRunning, setIsRunning] = useState()
@@ -19,6 +20,7 @@ const Pomodoro = () => {
             const interval = setInterval(() => {
                 if (isRunning && time > 0) {
                     setTime(time => time - 1)
+                    totTime.current += 1
                 } else if (time === 0) {
                     // handleReset()
                 }
@@ -75,7 +77,7 @@ const Pomodoro = () => {
 
     const handleEndSession = () => {
         return (
-            navigation.navigate("CreateSession")
+            navigation.navigate("CreateSession", { time: totTime.current })
             // <AlertDialog isOpen={isOpen} onClose={() => setIsOpen(!isOpen)} >
             //     <AlertDialog.Content>
             //         <AlertDialog.CloseButton />

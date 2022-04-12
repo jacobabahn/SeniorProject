@@ -5,7 +5,7 @@ import { UserContext } from "../App"
 import { supabase } from "../utils/supabase"
 import { Center, Box, Text, Divider, Button } from "native-base"
 
-const ViewSession = ({route}) => {
+const ViewSession = ({ route }) => {
     const [sessionData, setSessionData] = useState()
     const [isLoading, setIsLoading] = useState(true)
     const startDuration = useRef(0)
@@ -57,10 +57,10 @@ const ViewSession = ({route}) => {
                     <Text color="dark.600" fontSize="3xl" pt="4" pb="2">{sessionData[0].title}</Text>
                     <Divider bg="dark.400" variant="horizontal" w="100%" m="1" thickness="0.5" my="3" />
                 </Center>
-                <Text color="dark.500" fontSize="xl" pt="2" pb="1">Description: </Text>
-                <Text color="dark.500" fontSize="lg" mx="0.5" mt="0.5">{sessionData[0].description}</Text>
-                <Divider bg="dark.400" variant="horizontal" w="100%" m="1" thickness="0.5" mt="5" />
-                <Text color="dark.500" fontSize="xl" pt="2" pb="1">Duration: {sessionData[0].duration} </Text>
+                <Text color="dark.500" fontSize="xl" pt="2" pb="1" mx="2">Description: </Text>
+                <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">{sessionData[0].description}</Text>
+                <Divider bg="dark.400" variant="horizontal" w="100%" thickness="0.5" mt="5" />
+                <Text color="dark.500" fontSize="xl" mx="2" pt="2" pb="1">Duration: {sessionData[0].duration} </Text>
 
                 <Button style={styles.upload} mt="5" rounded="xl" bg="info.700" onPress={handleUpload}>Upload</Button>
 
