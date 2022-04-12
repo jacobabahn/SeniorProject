@@ -8,6 +8,7 @@ import ViewSessions from "../src/ViewSessions"
 import ViewSession from "../src/ViewSession"
 import CreateSession from "../src/CreateSession"
 import FriendSearch from "../src/FriendSearch";
+import FriendRequests from "../src/FriendRequests";
 
 const Tab = createMaterialTopTabNavigator()
 
@@ -61,6 +62,7 @@ const Navigator = () => {
                 <Stack.Screen name="ViewSession" component={ViewSession} />
                 <Stack.Screen name="CreateSession" component={CreateSession} />
                 <Stack.Screen name="FriendSearch" component={FriendSearch} />
+                <Stack.Screen name="FriendRequests" component={FriendRequests} />
             </Stack.Navigator>
         </NavigationContainer>
     )

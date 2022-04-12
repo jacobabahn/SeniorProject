@@ -46,6 +46,10 @@ const ViewSessions = () => {
         navigation.navigate("FriendSearch")
     }
 
+    const requests = () => {
+        navigation.navigate("FriendRequests")
+    }
+
     const handleTime = (time) => {
         let hours = Math.floor(time / 60)
         let minutes = time - hours * 60
@@ -62,7 +66,8 @@ const ViewSessions = () => {
                 <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />
             </Center>
             <FlatList style={styles.flatList} data={sessionData} renderItem={Item} />
-            <Button mb="12" w="30%" ml="60%" onPress={search}>Search Users</Button>
+            <Button mb="6" w="30%" ml="60%" onPress={search}>Search Users</Button>
+            <Button mb="12" w="35%" ml="58%" onPress={requests}>Friend Requests</Button>
         </Box>
     )
 }
