@@ -42,6 +42,10 @@ const ViewSessions = () => {
         supabase.auth.signOut()
     }
 
+    const search = () => {
+        navigation.navigate("FriendSearch")
+    }
+
     const handleTime = (time) => {
         let hours = Math.floor(time / 60)
         let minutes = time - hours * 60
@@ -58,7 +62,7 @@ const ViewSessions = () => {
                 <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />
             </Center>
             <FlatList style={styles.flatList} data={sessionData} renderItem={Item} />
-            {/* <Button mb="12" onPress={logOut}>Log Out</Button> */}
+            <Button mb="12" w="30%" ml="60%" onPress={search}>Search Users</Button>
         </Box>
     )
 }
