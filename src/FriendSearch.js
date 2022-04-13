@@ -17,7 +17,7 @@ const FriendSearch = () => {
         const { data: User, error } = await supabase
             .from('User')
             .select('*')
-            .like('email', `%${search}%`)
+            .ilike('email', `%${search}%`)
         setSearchData(User)
     }
 
@@ -39,7 +39,7 @@ const FriendSearch = () => {
                 <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />
             </Center>
 
-            <Input fontSize="xl" m="auto" h="6%" w="90%" varaint="outline" placeholder="Search Users" value={search} onChangeText={(text) => setSearch(text)}/>
+            <Input color="white" fontSize="xl" m="auto" h="6%" w="90%" varaint="outline" placeholder="Search Users" value={search} onChangeText={(text) => setSearch(text)}/>
             <FlatList style={styles.flatList} data={searchData} renderItem={Item} />
         </Box>
     )

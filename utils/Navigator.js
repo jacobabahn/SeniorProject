@@ -4,11 +4,13 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Pomodoro from "../src/Pomodoro"
 import ViewPosts from "../src/ViewPosts"
+import ViewPost from "../src/ViewPost";
 import ViewSessions from "../src/ViewSessions"
 import ViewSession from "../src/ViewSession"
 import CreateSession from "../src/CreateSession"
 import FriendSearch from "../src/FriendSearch";
 import FriendRequests from "../src/FriendRequests";
+import Profile from "../src/Profile";
 
 const Tab = createMaterialTopTabNavigator()
 
@@ -54,15 +56,27 @@ const Tabs = () => {
 
 const Stack = createNativeStackNavigator()
 
+const navTheme = {
+    colors: {
+        background: "#18181b",
+    }
+}
+
 const Navigator = () => {
     return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="Tabs" screenOptions={{headerShown: false}}>
+        <NavigationContainer theme={navTheme}>
+            <Stack.Navigator 
+                initialRouteName="Tabs" 
+                screenOptions={{
+                    headerShown: false,
+                }}>
                 <Stack.Screen name="Tabs" component={Tabs} />
                 <Stack.Screen name="ViewSession" component={ViewSession} />
+                <Stack.Screen name="ViewPost" component={ViewPost} />
                 <Stack.Screen name="CreateSession" component={CreateSession} />
                 <Stack.Screen name="FriendSearch" component={FriendSearch} />
                 <Stack.Screen name="FriendRequests" component={FriendRequests} />
+                <Stack.Screen name="Profile" component={Profile} />
             </Stack.Navigator>
         </NavigationContainer>
     )

@@ -26,7 +26,6 @@ export default function App() {
                 <StatusBar barStyle="light-content" />
                     <UserContext.Provider value={session}>
                         <Box h="100%" w="100%" bg="dark.50" safeArea>
-                            {/* <CreateSession /> */}
                             {!session ? <Auth /> : <Navigator id={session.user.id} session={session} />}
                         </Box>
                     </UserContext.Provider>

@@ -1,12 +1,14 @@
-import { View, FlatList, StyleSheet} from "react-native"
+import { View, FlatList, StyleSheet, TouchableOpacity} from "react-native"
 import { useState, useEffect } from "react"
 import Card from "../components/PostCard"
 // Initialize the JS client
 import { supabase } from "../utils/supabase"
 import { Center, Box, Text, Divider } from "native-base"
+import { useNavigation } from "@react-navigation/native"
 
 const ViewPosts = () => {
     const [postData, setPostData] = useState()
+    const navigation = useNavigation()
     
     useEffect(() => {
         getData()
@@ -20,8 +22,16 @@ const ViewPosts = () => {
     }
 
     const Item = ({ item }) => (
-        <Card title={item.title} description={item.description} duration={handleTime(item.duration)} />
+        <TouchableOpacity onPress={() => handlePress(item.id)}>
+            <Card title={item.title} description={item.description} duration={handleTime(item.duration)} />
+        </TouchableOpacity>
     )
+
+    const handlePress = (id) => {
+        return (
+            navigation.navigate("ViewPost", { id: id })
+        )
+    }
 
     const handleTime = (time) => {
         let hours = Math.floor(time / 60)
