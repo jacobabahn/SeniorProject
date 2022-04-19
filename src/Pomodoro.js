@@ -137,6 +137,8 @@ const style = StyleSheet.create({
     time: {
         fontVariant: ["tabular-nums"],
     },
+    card: {
+    }
 })
 
 export default Pomodoro

@@ -29,6 +29,7 @@ const Tabs = () => {
                     left: "13%",
                     height: 70,
                     width: "74%",
+                    marginTop: "1%",
                     backgroundColor: "#27272a",
                     borderTopWidth: 0,
                 },

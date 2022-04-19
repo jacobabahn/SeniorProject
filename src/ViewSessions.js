@@ -3,10 +3,11 @@ import { useState, useEffect, useContext } from "react"
 import Card from "../components/SessionCard"
 // Initialize the JS client
 import { supabase } from "../utils/supabase"
-import { Center, Box, Text, Divider, Pressable, Button } from "native-base"
+import { Center, Box, Text, Divider, Pressable, Button, Image } from "native-base"
 import { UserContext } from "../App"
 import ViewSession from "./ViewSession"
 import { useNavigation } from "@react-navigation/native"
+import { Feather } from '@expo/vector-icons';
 
 const ViewSessions = () => {
     const [sessionData, setSessionData] = useState()
@@ -64,15 +65,18 @@ const ViewSessions = () => {
     }
     
     return (
-        <Box h="100%" w="100%" bg="dark.50">
+        <Box h="96%" w="100%" bg="dark.50">
             <Center>
                 <Text color="dark.600" fontSize="3xl" pt="4" pb="2">Your Sessions</Text>
                 <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />
             </Center>
             <FlatList style={styles.flatList} data={sessionData} renderItem={Item} />
-            <Button mt="3"w="30%" ml="60%" onPress={search}>Search Users</Button>
-            <Button mt="3" w="35%" ml="58%" onPress={requests}>Friend Requests</Button>
-            <Button mt="3" mb="10" w="30%" ml="60%" onPress={profile}>Profile</Button>
+            {/* <Button mt="3"w="30%" ml="60%" onPress={search}>Search Users</Button>
+            <Button mt="3" w="35%" ml="58%" onPress={requests}>Friend Requests</Button> */}
+            <Button mt="3" mb="10" w="30%" onPress={profile}>Profile</Button>
+            <TouchableOpacity onPress={search}>
+                <Feather name="search" size="40%" color="white" />
+            </TouchableOpacity>
             {/* <Button mt="3" w="35%" ml="58%" onPress={logOut}>Log Out</Button> */}
         </Box>
     )

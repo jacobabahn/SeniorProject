@@ -14,16 +14,16 @@ const FriendSearch = () => {
     }, [search])
 
     const getData = async () => {
-        const { data: User, error } = await supabase
-            .from('User')
+        const { data: users, error } = await supabase
+            .from('users')
             .select('*')
             .ilike('email', `%${search}%`)
-        setSearchData(User)
+        setSearchData(users)
     }
 
     const Item = ({ item }) => (
         <Center>
-            <Box p="3" w="90%" h="100%" bg="dark.100" rounded="md">
+            <Box p="3" w="90%" m="3" bg="dark.100" rounded="md">
                 <Center style={styles.card}>
                     <Text fontSize="md" color="white">{item.email}</Text>
                     <Button w="15%">Add</Button>

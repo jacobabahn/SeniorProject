@@ -13,18 +13,23 @@ const FriendRequests = () => {
     }, [])
 
     const getData = async () => {
-        const { data: User, error } = await supabase
-            .from('User')
+        const { data: users, error } = await supabase
+            .from('users')
             .select('*')
-        setRequests(User)
+        setRequests(users)
     }
 
     const Item = ({ item }) => (
         <Center>
-            <Box p="3" w="90%" h="100%" bg="dark.100" rounded="md">
+            <Box p="3" w="90%" m="3" bg="dark.100" rounded="md">
                 <Center style={styles.card}>
-                    <Text fontSize="md" color="white">{item.email}</Text>
-                    <Button w="15%">Add</Button>
+                    <Box>
+                        <Text fontSize="md" color="white">{item.email}</Text>
+                    </Box>
+                    <Box style={styles.buttons}>
+                        <Button w="55">Add</Button>
+                        <Button w="55" ml="3" bg="danger.500">X</Button>
+                    </Box>
                 </Center>
             </Box>
         </Center>
@@ -49,7 +54,12 @@ const styles = StyleSheet.create({
     },
     card: {
         flexDirection: "row",
+        width: "100%",
         justifyContent: "space-between",
+    },
+    buttons: {
+        flexDirection: "row",
+
     }
 })
 

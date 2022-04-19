@@ -1,7 +1,15 @@
-import { Text, Box, Center, Divider } from "native-base"
+import { Text, Box, Center, Divider, Pressable } from "native-base"
 import { StyleSheet } from "react-native"
+import { useNavigation } from "@react-navigation/native"
+import { TouchableOpacity } from "react-native"
 
 const Profile = () => {
+    const navigation = useNavigation()
+
+    const requests = () => {
+        navigation.navigate("FriendRequests")
+    }
+
     return (
         <Box h="100%" w="100%" bg="dark.50">
             <Center>
@@ -43,8 +51,10 @@ const Profile = () => {
                     <Box style={styles.inner}>
                         <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">Friend Count: </Text>
                         <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">0</Text>
-                        <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">Friend Requests: </Text>
-                        <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">0</Text>
+                        <TouchableOpacity onPress={requests}>
+                            <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">Friend Requests: </Text>
+                            <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">0</Text>
+                        </TouchableOpacity>
                     </Box>
                 </Box>
             </Box>
