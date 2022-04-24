@@ -3,7 +3,7 @@ import { useState, useEffect, createContext } from "react";
 // import { AsyncStorage } from 'react-native';
 import 'react-native-url-polyfill/auto'
 import { StatusBar } from "native-base"
-import { supabase } from "./utils/supabase"
+import { supabase } from "./utils/.supabase"
 import { Box, NativeBaseProvider, Center } from "native-base"
 import Navigator from './utils/Navigator';
 import Auth from './utils/Auth';
