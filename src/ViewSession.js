@@ -1,9 +1,10 @@
-import { View, FlatList, StyleSheet} from "react-native"
+import { View, FlatList, StyleSheet, Alert} from "react-native"
 import { useState, useEffect, useContext, useRef } from "react"
 import { UserContext } from "../App"
 // Initialize the JS client
 import { supabase } from "../utils/supabase"
 import { Center, Box, Text, Divider, Button } from "native-base"
+import { useNavigation } from "@react-navigation/native"
 
 const ViewSession = ({ route }) => {
     const [sessionData, setSessionData] = useState()
@@ -11,6 +12,7 @@ const ViewSession = ({ route }) => {
     const startDuration = useRef(0)
     const userSession = useContext(UserContext)
     const id = route.params.id
+    const navigation = useNavigation()
 
     useEffect(() => {
         getData()
@@ -28,6 +30,14 @@ const ViewSession = ({ route }) => {
         setSessionData(Session)
     }
 
+    const handleDelete = async () => {
+        let id = route.params.id
+        let { data: Session, error } = await supabase
+            .from('Session')
+            .delete()
+            .match({ id: id })
+    }
+
     const handleTime = (time) => {
         let hours = Math.floor(time / 60)
         let minutes = time - hours * 60
@@ -35,6 +45,47 @@ const ViewSession = ({ route }) => {
         minutes = (minutes < 10 ? '0' : '') + minutes;
         
         return `${hours}:${minutes}`
+    }
+
+
+    const handleUploadButton = () => {
+        return (
+            Alert.alert(
+                "Upload",
+                "Are you sure you want to upload this session?",
+                [
+                    {
+                        text: "Cancel",
+                        onPress: () => {},
+                        style: "cancel"
+                    },
+                    { text: "OK", onPress: () => handleUpload() }
+                ],
+            )
+        )
+    }
+
+    const handleDeleteButton = () => {
+        return (
+            Alert.alert(
+                "Delete",
+                "Are you sure you want to delete this session?",
+                [
+                    {
+                        text: "Cancel",
+                        onPress: () => {},
+                        style: "cancel"
+                    },
+                    {
+                        text: "OK",
+                        onPress: () => {
+                            handleDelete()
+                            navigation.navigate("Tabs", { screen: "ViewSessions"})},
+                        style: "destructive"
+                    }
+                ],
+            )
+        )
     }
 
     const handleUpload = async () => {
@@ -66,8 +117,9 @@ const ViewSession = ({ route }) => {
                     <Text color="white" fontSize="xl" mx="2" pt="2" pb="1">Duration: {sessionData[0].duration}</Text>
                 </Box>
 
-                <Button style={styles.upload} mt="5" rounded="xl" bg="info.700" onPress={handleUpload}>Upload</Button>
-
+                <Button style={styles.upload} mt="5" rounded="xl" bg="info.700" onPress={handleUploadButton}>Upload</Button>
+                <Button style={styles.delete} mt="5" rounded="xl" bg="danger.800" onPress={handleDeleteButton}>Delete</Button>
+            
             </Box>
         </Center>
     )
@@ -83,9 +135,16 @@ const styles = StyleSheet.create({
         width: "25%",
         height: "6%",
         position: "absolute",
+        bottom: "13%",
+        right: "5%",
+    },
+    delete: {
+        width: "25%",
+        height: "6%",
+        position: "absolute",
         bottom: "5%",
         right: "5%",
-    }
+    },
 })
 
 export default ViewSession

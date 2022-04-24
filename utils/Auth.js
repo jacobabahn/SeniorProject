@@ -33,6 +33,7 @@ export default function Auth() {
           value={email}
           placeholder="email@address.com"
           autoCapitalize={'none'}
+          style={{color: 'white'}}
         />
       </View>
       <View style={styles.verticallySpaced}>
@@ -75,5 +76,6 @@ const styles = StyleSheet.create({
   },
   mt20: {
     marginTop: 20,
+    color: 'white',
   },
 });

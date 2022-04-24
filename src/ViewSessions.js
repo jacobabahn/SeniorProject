@@ -1,4 +1,4 @@
-import { View, FlatList, StyleSheet, TouchableOpacity} from "react-native"
+import { View, FlatList, StyleSheet, TouchableOpacity, RefreshControl} from "react-native"
 import { useState, useEffect, useContext } from "react"
 import Card from "../components/SessionCard"
 // Initialize the JS client
@@ -7,10 +7,11 @@ import { Center, Box, Text, Divider, Pressable, Button, Image } from "native-bas
 import { UserContext } from "../App"
 import ViewSession from "./ViewSession"
 import { useNavigation } from "@react-navigation/native"
-import { Feather } from '@expo/vector-icons';
+import { Feather, MaterialIcons } from '@expo/vector-icons';
 
 const ViewSessions = () => {
     const [sessionData, setSessionData] = useState()
+    const [refreshing, setRefreshing] = useState(false)
     const userSession = useContext(UserContext)
     const navigation = useNavigation()
     
@@ -19,12 +20,14 @@ const ViewSessions = () => {
     }, [])
 
     const getData = async () => {
+        setRefreshing(true)
         let { data: Session, error } = await supabase
             .from('Session')
             .select('*')
             .eq('user_id', userSession.user.id)
         
         setSessionData(Session)
+        setRefreshing(false)
     }
 
     const Item = ({ item }) => (
@@ -37,10 +40,6 @@ const ViewSessions = () => {
         return (
             navigation.navigate("ViewSession", { id: id })
         )
-    }
-
-    const logOut = () => {
-        supabase.auth.signOut()
     }
 
     const search = () => {
@@ -70,14 +69,20 @@ const ViewSessions = () => {
                 <Text color="dark.600" fontSize="3xl" pt="4" pb="2">Your Sessions</Text>
                 <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />
             </Center>
-            <FlatList style={styles.flatList} data={sessionData} renderItem={Item} />
-            {/* <Button mt="3"w="30%" ml="60%" onPress={search}>Search Users</Button>
-            <Button mt="3" w="35%" ml="58%" onPress={requests}>Friend Requests</Button> */}
-            <Button mt="3" mb="10" w="30%" onPress={profile}>Profile</Button>
-            <TouchableOpacity onPress={search}>
-                <Feather name="search" size="40%" color="white" />
+            <FlatList
+                style={styles.flatList}
+                data={sessionData} 
+                renderItem={Item} 
+                refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={getData} />
+                }/>
+            {/* <Button mt="3" w="35%" ml="58%" onPress={requests}>Friend Requests</Button> */}
+            <TouchableOpacity onPress={profile}>
+                <MaterialIcons name="account-circle" size={40} color="white" />
             </TouchableOpacity>
-            {/* <Button mt="3" w="35%" ml="58%" onPress={logOut}>Log Out</Button> */}
+            <TouchableOpacity onPress={search}>
+                <Feather style={styles.search} name="search" size={40} color="white" />
+            </TouchableOpacity>
         </Box>
     )
 }
@@ -86,6 +91,11 @@ const styles = StyleSheet.create({
     flatList: {
         height: "100%",
         width: "100%",
+    },
+    search: {
+        position: "absolute",
+        bottom: "5%",
+        right: "5%",
     }
 })
 

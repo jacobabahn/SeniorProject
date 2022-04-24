@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useContext } from "react"
 import { Box, Text, Button, Progress, Center, AlertDialog } from "native-base"
-import { StyleSheet } from "react-native"
+import { StyleSheet, Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
 const Pomodoro = () => {
@@ -12,7 +12,6 @@ const Pomodoro = () => {
     const [time, setTime] = useState(defaulTime.current)
     const [startMin, setStartMin] = useState(Math.floor(time / 60))
     const [isRunning, setIsRunning] = useState()
-    const [isOpen, setIsOpen] = useState(true)
     const navigation = useNavigation()
     
 
@@ -77,27 +76,26 @@ const Pomodoro = () => {
 
     const handleEndSession = () => {
         return (
-            navigation.navigate("CreateSession", { time: totTime.current })
-            // <AlertDialog isOpen={isOpen} onClose={() => setIsOpen(!isOpen)} >
-            //     <AlertDialog.Content>
-            //         <AlertDialog.CloseButton />
-            //         <AlertDialog.Header>Delete Customer</AlertDialog.Header>
-            //         <AlertDialog.Body>
-            //             This will remove all data relating to Alex. This action cannot be
-            //             reversed. Deleted data can not be recovered.
-            //         </AlertDialog.Body>
-            //         <AlertDialog.Footer>
-            //             <Button.Group space={2}>
-            //             <Button variant="unstyled" colorScheme="coolGray" onPress={() => setIsOpen(!isOpen)}>
-            //                 Cancel
-            //             </Button>
-            //             <Button colorScheme="danger" onPress={() => setIsOpen(!isOpen)}>
-            //                 End
-            //             </Button>
-            //             </Button.Group>
-            //         </AlertDialog.Footer>
-            //         </AlertDialog.Content>
-            // </AlertDialog>
+            Alert.alert(
+                "End Session",
+                "If you end your session, you will not be able to resume it later.",
+                [
+                    {
+                        text: "Cancel",
+                        // onPress: () => navigation.navigate("Timer"),
+                        onPress: () => {},
+                        style: "cancel"
+                    },
+                    {
+                        text: "Ok",
+                        onPress: () => {
+                            navigation.navigate("CreateSession", {time: totTime.current})
+                            totTime.current = 0
+                            setTime(defaulTime.current)
+                        }
+                    }
+                ]
+            )
         )
     }
 

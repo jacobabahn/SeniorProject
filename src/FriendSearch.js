@@ -1,13 +1,14 @@
 import { DefaultTheme } from "@react-navigation/native"
-import { StyleSheet, FlatList } from "react-native"
+import { StyleSheet, FlatList, Alert } from "react-native"
 import { Box, Input, Text, Button, Center, Divider } from "native-base"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { supabase } from "../utils/supabase"
-
+import { UserContext } from "../App"
 
 const FriendSearch = () => {
     const [search, setSearch] = useState("")
-    const [searchData, setSearchData] = useState()
+    const [searchData, setSearchData] = useState("")
+    const userSession = useContext(UserContext)
 
     useEffect(() => {
         getData()
@@ -21,12 +22,41 @@ const FriendSearch = () => {
         setSearchData(users)
     }
 
+    const handleAddButton = async (id) => {
+        return (
+            Alert.alert(
+                "Add Friend",
+                "Are you sure you want to Add this person as a friend?",
+                [
+                    {
+                        text: "Cancel",
+                        onPress: () => {},
+                        style: "cancel"
+                    },
+                    {
+                        text: "Ok",
+                        onPress: () => {
+                            sendData(id)
+                            console.log("You friend request has successfully been sent!")
+                        }
+                    }
+                ]
+            )
+        )
+    }
+
+    const sendData = async (id) => {
+        let { data, error } = await supabase
+            .from('FriendRequest')
+            .insert({ user_id: id, friend_id: userSession.user.id })
+    }
+
     const Item = ({ item }) => (
         <Center>
             <Box p="3" w="90%" m="3" bg="dark.100" rounded="md">
                 <Center style={styles.card}>
                     <Text fontSize="md" color="white">{item.email}</Text>
-                    <Button w="15%">Add</Button>
+                    <Button w="15%" onPress={() => handleAddButton(item.id)}>Add</Button>
                 </Center>
             </Box>
         </Center>
@@ -39,7 +69,7 @@ const FriendSearch = () => {
                 <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />
             </Center>
 
-            <Input color="white" fontSize="xl" m="auto" h="6%" w="90%" varaint="outline" placeholder="Search Users" value={search} onChangeText={(text) => setSearch(text)}/>
+            <Input color="white" borderColor="grey" fontSize="xl" m="auto" h="6%" w="90%" variant="outline" placeholder="Search Users" value={search} onChangeText={(text) => setSearch(text)}/>
             <FlatList style={styles.flatList} data={searchData} renderItem={Item} />
         </Box>
     )
