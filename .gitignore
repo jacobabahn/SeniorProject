@@ -1,4 +1,5 @@
 node_modules/
+utils/supabase.js
 .expo/
 dist/
 npm-debug.*
@@ -9,7 +10,6 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-supabase.js
 
 # macOS
 .DS_Store

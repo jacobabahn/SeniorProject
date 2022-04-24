@@ -15,8 +15,8 @@ const ViewPosts = () => {
     }, [])
 
     const getData = async () => {
-        let { data: Session, error } = await supabase
-            .from('Session')
+        let { data: Post, error } = await supabase
+            .from('Post')
             .select('*')
         setPostData(Session)
     }

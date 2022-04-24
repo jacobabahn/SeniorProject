@@ -2,7 +2,7 @@ import { View, FlatList, StyleSheet} from "react-native"
 import { useState, useEffect, useContext, useRef } from "react"
 import { UserContext } from "../App"
 // Initialize the JS client
-import { supabase } from "../utils/.supabase"
+import { supabase } from "../utils/supabase"
 import { Center, Box, Text, Divider, Button } from "native-base"
 
 const ViewPost = ({ route }) => {
