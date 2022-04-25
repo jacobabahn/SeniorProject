@@ -2,16 +2,20 @@ import { Text, Box, Center, Divider, Pressable, Button } from "native-base"
 import { StyleSheet } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { TouchableOpacity } from "react-native"
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState, useContext, useRef } from "react"
 import { supabase } from "../utils/supabase"
 import { UserContext } from "../App"
 
 const Profile = () => {
     const [profileData, setProfileData] = useState()
+    const postCount = useRef()
+    const friendCount = useRef()
+    const [sessionCount, setSessionCount] = useState()
     const userSession = useContext(UserContext)
     const navigation = useNavigation()
 
     useEffect(() => {
+        getStats()
         getData()
     }, [])
 
@@ -22,6 +26,39 @@ const Profile = () => {
             .eq('id', userSession.user.id)
 
         setProfileData(users[0])
+    }
+
+    const getStats = () => {
+        getPostCount()
+        getFriendCount()
+        getSessionCount()
+    }
+
+    const getPostCount = async () => {
+        let { data: Post, error } = await supabase
+            .from('Post')
+            .select('*')
+            .eq('user_id', userSession.user.id)
+        
+        postCount.current = Post.length
+    }
+
+    const getFriendCount = async () => {
+        let { data: Friend, error } = await supabase
+            .from('Friend')
+            .select('*')
+            .eq('user_id', userSession.user.id)
+        
+        friendCount.current = Friend.length
+    }
+
+    const getSessionCount = async () => {
+        let { data: Session, error } = await supabase
+            .from('Session')
+            .select('*')
+            .eq('user_id', userSession.user.id)
+        
+        setSessionCount(Session.length)
     }
 
     const requests = () => {
@@ -74,13 +111,13 @@ const Profile = () => {
                 <Box style={styles.stats}>
                     <Box style={styles.inner}>
                         <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">Post Count: </Text>
-                        <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">0</Text>
+                        <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">{postCount.current}</Text>
                         <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">Session Count: </Text>
-                        <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">0</Text>
+                        <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">{sessionCount}</Text>
                     </Box>
                     <Box style={styles.inner}>
                         <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">Friend Count: </Text>
-                        <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">0</Text>
+                        <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">{friendCount.current}</Text>
                         <TouchableOpacity onPress={requests} style={styles.button}>
                             <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">Friend Requests: </Text>
                             <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">0</Text>

@@ -16,15 +16,17 @@ const ViewPosts = () => {
     
     useEffect(() => {
         getData()
-        getFriends()
     }, [])
 
     const getData = async () => {
         let { data: Post, error } = await supabase
             .from('Post')
             .select('session_id, created_at, Session (title, description, duration, user_id)')
+            .order('created_at', { ascending: false })
 
         postData.current = Post
+
+        getFriends()
     }
 
     const getFriends = async () => {
@@ -48,7 +50,6 @@ const ViewPosts = () => {
                 friendsMutated[val.friend_id] = val.users.email
             }
         }
-        // setFriends(friendsMutated)
         friends.current = friendsMutated
 
         let postDataMutated = []
@@ -77,7 +78,7 @@ const ViewPosts = () => {
         let hours = Math.floor(time / 60)
         let minutes = time - hours * 60
 
-        minutes = (minutes < 10 ? '0' : '') + minutes;
+        minutes = (minutes < 10 ? '0' : '') + minutes
         
         return `${hours}:${minutes}`
     }

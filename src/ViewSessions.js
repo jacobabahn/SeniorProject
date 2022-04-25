@@ -25,6 +25,7 @@ const ViewSessions = () => {
             .from('Session')
             .select('*')
             .eq('user_id', userSession.user.id)
+            .order('created_at', { ascending: false })
         
         setSessionData(Session)
         setRefreshing(false)
@@ -74,9 +75,8 @@ const ViewSessions = () => {
                 data={sessionData} 
                 renderItem={Item} 
                 refreshControl={
-                    <RefreshControl refreshing={refreshing} onRefresh={getData} />
+                    <RefreshControl tintColor="#fff" refreshing={refreshing} onRefresh={getData} />
                 }/>
-            {/* <Button mt="3" w="35%" ml="58%" onPress={requests}>Friend Requests</Button> */}
             <TouchableOpacity onPress={profile}>
                 <MaterialIcons style={styles.profile} name="account-circle" size={40} color="white" />
             </TouchableOpacity>
