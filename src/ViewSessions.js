@@ -78,7 +78,7 @@ const ViewSessions = () => {
                 }/>
             {/* <Button mt="3" w="35%" ml="58%" onPress={requests}>Friend Requests</Button> */}
             <TouchableOpacity onPress={profile}>
-                <MaterialIcons name="account-circle" size={40} color="white" />
+                <MaterialIcons style={styles.profile} name="account-circle" size={40} color="white" />
             </TouchableOpacity>
             <TouchableOpacity onPress={search}>
                 <Feather style={styles.search} name="search" size={40} color="white" />
@@ -95,7 +95,11 @@ const styles = StyleSheet.create({
     search: {
         position: "absolute",
         bottom: "5%",
-        right: "5%",
+        right: "0%",
+        marginRight: "5%",
+    },
+    profile: {
+        marginLeft: "5%",
     }
 })
 

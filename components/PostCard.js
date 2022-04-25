@@ -6,7 +6,7 @@ const Card = (props) => {
         <Center>
             <Box style={styles.body} p="5" h="auto" w ="90%" bg="dark.100" m="4%" rounded="2xl" shadow="3">
                 <Box style={styles.profile} bg="info.700" rounded="md" px="2" py="0.5">
-                    <Text color="white" fontSize="md" >{props.title}</Text>
+                    <Text color="white" fontSize="md" >{props.email}</Text>
                 </Box>
                 <Box style={styles.container}>
                     <Text style={styles.title} numberOfLines={1} py="2" px="3" color="white" fontSize="2xl" >{props.title}</Text>

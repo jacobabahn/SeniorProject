@@ -56,7 +56,7 @@ const FriendSearch = () => {
             <Box p="3" w="90%" m="3" bg="dark.100" rounded="md">
                 <Center style={styles.card}>
                     <Text fontSize="md" color="white">{item.email}</Text>
-                    <Button w="15%" onPress={() => handleAddButton(item.id)}>Add</Button>
+                    <Button w="15%" bg="info.700" onPress={() => handleAddButton(item.id)}>Add</Button>
                 </Center>
             </Box>
         </Center>

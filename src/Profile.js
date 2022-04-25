@@ -81,7 +81,7 @@ const Profile = () => {
                     <Box style={styles.inner}>
                         <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">Friend Count: </Text>
                         <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">0</Text>
-                        <TouchableOpacity onPress={requests}>
+                        <TouchableOpacity onPress={requests} style={styles.button}>
                             <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">Friend Requests: </Text>
                             <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">0</Text>
                         </TouchableOpacity>
@@ -107,6 +107,11 @@ const styles = StyleSheet.create({
         height: "100%",
         width: "100%",
     },
+    button: {
+        backgroundColor: "#18181b",
+        borderRadius: 10,
+        marginTop: "2%",
+    }
 })
 
 export default Profile

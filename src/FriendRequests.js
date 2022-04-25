@@ -75,6 +75,14 @@ const FriendRequests = () => {
         const { data, error } = await supabase
             .from('Friend')
             .insert({ user_id: userSession.user.id, friend_id: id })
+        
+        secondRequest(id)
+    }
+
+    const secondRequest = async (id) => {
+        const { data, error } = await supabase
+            .from('Friend')
+            .insert({ user_id: id, friend_id: userSession.user.id })
     }
 
     const removeRequest = async (id) => {
