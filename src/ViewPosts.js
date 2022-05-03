@@ -1,4 +1,4 @@
-import { View, FlatList, StyleSheet, TouchableOpacity} from "react-native"
+import { View, FlatList, StyleSheet, TouchableOpacity, RefreshControl} from "react-native"
 import { useState, useEffect, useContext, useRef } from "react"
 import Card from "../components/PostCard"
 // Initialize the JS client
@@ -9,6 +9,7 @@ import { UserContext } from "../App"
 
 const ViewPosts = () => {
     const [posts, setPosts] = useState()
+    const [refreshing, setRefreshing] = useState(false)
     const postData = useRef()
     const friends = useRef()
     const navigation = useNavigation()
@@ -97,7 +98,10 @@ const ViewPosts = () => {
                 <Text color="dark.600" fontSize="3xl" pt="4" pb="2">Posts</Text>
                 <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />
             </Center>
-            <FlatList style={styles.flatList} data={posts} renderItem={Item} />
+            <FlatList style={styles.flatList} data={posts} renderItem={Item} 
+                refreshControl={
+                    <RefreshControl tintColor="#fff" refreshing={refreshing} onRefresh={getData} />
+                }/>
         </Box>
     )
 }

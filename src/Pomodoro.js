@@ -11,9 +11,9 @@ const Pomodoro = () => {
     const totTime = useRef(0)
     const [time, setTime] = useState(defaulTime.current)
     const [startMin, setStartMin] = useState(Math.floor(time / 60))
+    const [breakMin, setBreakMin] = useState(Math.floor(breakTime.current / 60))
     const [isRunning, setIsRunning] = useState()
     const navigation = useNavigation()
-    
 
         useEffect(() => {
             const interval = setInterval(() => {
@@ -41,7 +41,6 @@ const Pomodoro = () => {
         console.log("reset")
         isBreak.current = !isBreak.current
         if (isBreak.current) {
-            console.log("break")
             return (
                 <Box mt="60%">
                     <Center>
@@ -51,7 +50,6 @@ const Pomodoro = () => {
                 </Box>
             )
         } else {
-            console.log("not Break")
             setIsRunning(false)
             isStarted.current = false
             setTime(defaulTime.current)
@@ -65,7 +63,7 @@ const Pomodoro = () => {
                 <Center>
                     <Text style={style.time} mt="45%" fontSize="8xl" color="white">{minutes}:{seconds}</Text>
                 </Center>
-                <Progress colorScheme="info" size="lg" m="6" value={Math.abs(100 - (time / (startMin * 60) * 100))} />
+                {/* <Progress colorScheme="info" size="lg" m="6" value={Math.abs(100 - (time / (breakMin * 60) * 100))} /> */}
                 <Box style={style.buttons}>
                     {!isRunning || !isStarted.current ? <Button bg="info.700" rounded="2xl" w="30%" onPress={handleButton}>Start</Button> :
                                                         <Button bg="info.700" rounded="2xl" w="30%" onPress={handleButton}>Pause</Button>}

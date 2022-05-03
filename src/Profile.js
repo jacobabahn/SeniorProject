@@ -90,16 +90,16 @@ const Profile = () => {
                 </Center>
                 <Box style={styles.stats}>
                     <Box style={styles.inner}>
-                        <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">Name: </Text>
-                        <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">John Doe</Text>
+                        {/* <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">Name: </Text> */}
+                        {/* <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">John Doe</Text> */}
                         <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">Email: </Text>
                         <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">{profileData.email}</Text>
                     </Box>
                     <Box style={styles.inner}>
                         <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">UserName: </Text>
                         <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">{!profileData.username ? "Set" : profileData.username}</Text>
-                        <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">Password: </Text>
-                        <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">********</Text>
+                        {/* <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">Password: </Text> */}
+                        {/* <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">********</Text> */}
                     </Box>
                 </Box>
             </Box>
