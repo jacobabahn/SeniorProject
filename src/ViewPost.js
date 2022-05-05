@@ -5,6 +5,9 @@ import { UserContext } from "../App"
 import { supabase } from "../utils/supabase"
 import { Center, Box, Text, Divider, Button } from "native-base"
 
+/**
+ * This is the individual post screen where a specific post is displayed.
+ */
 const ViewPost = ({ route }) => {
     const [sessionData, setSessionData] = useState()
     const [isLoading, setIsLoading] = useState(true)

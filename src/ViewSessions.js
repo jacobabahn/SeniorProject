@@ -9,6 +9,9 @@ import ViewSession from "./ViewSession"
 import { useNavigation } from "@react-navigation/native"
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 
+/**
+ * This is the batch sessions view where all of a users sessions are displayed.
+ */
 const ViewSessions = () => {
     const [sessionData, setSessionData] = useState()
     const [refreshing, setRefreshing] = useState(false)

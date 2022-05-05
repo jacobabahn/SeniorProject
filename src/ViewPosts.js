@@ -7,6 +7,9 @@ import { Center, Box, Text, Divider } from "native-base"
 import { useNavigation } from "@react-navigation/native"
 import { UserContext } from "../App"
 
+/**
+ * This is the Posts page where all of a users friends posts are displayed.
+ */
 const ViewPosts = () => {
     const [posts, setPosts] = useState()
     const [refreshing, setRefreshing] = useState(false)

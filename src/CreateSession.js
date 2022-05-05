@@ -4,6 +4,9 @@ import { useState, useEffect, useContext } from "react"
 import { UserContext } from "../App"
 import { supabase } from "../utils/supabase"
 
+/**
+ * View where the user implements the details for a new session.
+ */
 const CreateSession = ({ route }) => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")

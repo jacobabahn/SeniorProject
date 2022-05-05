@@ -6,6 +6,9 @@ import { supabase } from "../utils/supabase"
 import { Center, Box, Text, Divider, Button } from "native-base"
 import { useNavigation } from "@react-navigation/native"
 
+/**
+ * This is the individual session view component.
+ */
 const ViewSession = ({ route }) => {
     const [sessionData, setSessionData] = useState()
     const [isLoading, setIsLoading] = useState(true)

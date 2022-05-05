@@ -5,6 +5,10 @@ import { useEffect, useState, useContext } from "react"
 import { supabase } from "../utils/supabase"
 import { UserContext } from "../App"
 
+
+/**
+ * Renders all users and allows for searching and requesting to be friends.
+ */
 const FriendSearch = () => {
     const [search, setSearch] = useState("")
     const [searchData, setSearchData] = useState("")
