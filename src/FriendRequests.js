@@ -11,10 +11,13 @@ import { UserContext } from "../App"
 const FriendRequests = () => {
     const [requests, setRequests] = useState()
     const [users, setUsers] = useState()
+    const [didMount, setDidMount] = useState(false)
     const userSession = useContext(UserContext)
 
     useEffect(() => {
+        setDidMount(true)
         getData()
+        return () => setDidMount(false)
     }, [requests])
 
     const getData = async () => {
@@ -126,7 +129,7 @@ const FriendRequests = () => {
                 <Text color="dark.600" fontSize="3xl" pt="4" pb="2">Friend Requests</Text>
                 <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />
             </Center>
-            <FlatList style={styles.flatList} data={requests} renderItem={Item} />
+            <FlatList style={styles.flatList} data={requests} renderItem={Item} keyExtractor={(item, index) => index.toString()} />
         </Box>
     )
 }

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useContext } from "react"
 import { Box, Text, Button, Progress, Center, AlertDialog } from "native-base"
 import { StyleSheet, Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native"
+
 /**
  * This is the timer component where the main Pomodoro timer interface is rendered.
  */

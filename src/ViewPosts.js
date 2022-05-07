@@ -6,6 +6,7 @@ import { supabase } from "../utils/supabase"
 import { Center, Box, Text, Divider } from "native-base"
 import { useNavigation } from "@react-navigation/native"
 import { UserContext } from "../App"
+import { G } from "react-native-svg"
 
 /**
  * This is the Posts page where all of a users friends posts are displayed.
@@ -60,15 +61,15 @@ const ViewPosts = () => {
         for (let session of postData.current) {
             if (session.Session.user_id in friendsMutated) {
                 session.Session.email = friendsMutated[session.Session.user_id]
-                postDataMutated.push(session.Session)
+                postDataMutated.push(session)
             }
         }
         setPosts(postDataMutated)
     }
 
-    const Item = ({ item }) => (
-        <TouchableOpacity onPress={() => handlePress(item.id)}>
-            <Card email={item.email} title={item.title} description={item.description} duration={handleTime(item.duration)} />
+    const Item = ({ item, index }) => (
+        <TouchableOpacity onPress={() => handlePress(item.session_id)}>
+            <Card email={item.Session.email} title={item.Session.title} description={item.Session.description} duration={handleTime(item.Session.duration)} />
         </TouchableOpacity>
     )
 
@@ -101,7 +102,11 @@ const ViewPosts = () => {
                 <Text color="dark.600" fontSize="3xl" pt="4" pb="2">Posts</Text>
                 <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />
             </Center>
-            <FlatList style={styles.flatList} data={posts} renderItem={Item} 
+            <FlatList 
+                style={styles.flatList} 
+                data={posts} 
+                renderItem={Item} 
+                keyExtractor={(item, index) => index.toString()}
                 refreshControl={
                     <RefreshControl tintColor="#fff" refreshing={refreshing} onRefresh={getData} />
                 }/>
