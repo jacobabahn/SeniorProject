@@ -69,8 +69,16 @@ const ViewSessions = () => {
     
     return (
         <Box h="96%" w="100%" bg="dark.50">
+            <Center w="100%" style={styles.header}>
+                <TouchableOpacity onPress={profile}>
+                    <MaterialIcons style={styles.profile} name="account-circle" size={40} color="white" />
+                </TouchableOpacity>
+                <Text color="dark.600" fontSize="3xl" pt="4" pb="2" px="4">Your Sessions</Text>
+                <TouchableOpacity onPress={search}>
+                    <Feather style={styles.search} name="search" size={40} color="white" />
+                </TouchableOpacity>
+            </Center>
             <Center>
-                <Text color="dark.600" fontSize="3xl" pt="4" pb="2">Your Sessions</Text>
                 <Divider bg="dark.400" variant="horizontal" w="90%" m="1" thickness="0.5" />
             </Center>
             <FlatList
@@ -80,29 +88,29 @@ const ViewSessions = () => {
                 refreshControl={
                     <RefreshControl tintColor="#fff" refreshing={refreshing} onRefresh={getData} />
                 }/>
-            <TouchableOpacity onPress={profile}>
-                <MaterialIcons style={styles.profile} name="account-circle" size={40} color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={search}>
-                <Feather style={styles.search} name="search" size={40} color="white" />
-            </TouchableOpacity>
         </Box>
     )
 }
 
 const styles = StyleSheet.create({
+    header: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
     flatList: {
         height: "100%",
         width: "100%",
     },
     search: {
         position: "absolute",
-        bottom: "5%",
-        right: "0%",
-        marginRight: "5%",
+        bottom: -25,
+        right: 20,
     },
     profile: {
-        marginLeft: "5%",
+        position: "absolute",
+        left: 20,
+        bottom: -25,
+
     }
 })
 
