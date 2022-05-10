@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import { TouchableOpacity } from "react-native"
 import { useEffect, useState, useContext, useRef } from "react"
 import { supabase } from "../utils/supabase"
-import { UserContext } from "../App"
+import { UserContext } from "../utils/UserContext"
 
 /**
  * This is the Profile screen where generic user data is displayed.

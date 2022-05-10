@@ -3,7 +3,7 @@ import { StyleSheet, FlatList, Alert } from "react-native"
 import { Box, Input, Text, Button, Center, Divider } from "native-base"
 import { useEffect, useState, useContext } from "react"
 import { supabase } from "../utils/supabase"
-import { UserContext } from "../App"
+import { UserContext } from "../utils/UserContext"
 
 /**
  * View where a user accepts or declines friend requests.

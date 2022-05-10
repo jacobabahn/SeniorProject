@@ -5,7 +5,7 @@ import Card from "../components/PostCard"
 import { supabase } from "../utils/supabase"
 import { Center, Box, Text, Divider } from "native-base"
 import { useNavigation } from "@react-navigation/native"
-import { UserContext } from "../App"
+import { UserContext } from "../utils/UserContext"
 import { G } from "react-native-svg"
 
 /**

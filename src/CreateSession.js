@@ -1,7 +1,7 @@
 import { Box, Input, TextArea, Center, Text, Divider, Button } from "native-base"
 import { StyleSheet, Alert } from "react-native"
 import { useState, useEffect, useContext } from "react"
-import { UserContext } from "../App"
+import { UserContext } from "../utils/UserContext"
 import { supabase } from "../utils/supabase"
 
 /**

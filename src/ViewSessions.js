@@ -4,7 +4,7 @@ import Card from "../components/SessionCard"
 // Initialize the JS client
 import { supabase } from "../utils/supabase"
 import { Center, Box, Text, Divider, Pressable, Button, Image } from "native-base"
-import { UserContext } from "../App"
+import { UserContext } from "../utils/UserContext"
 import ViewSession from "./ViewSession"
 import { useNavigation } from "@react-navigation/native"
 import { Feather, MaterialIcons } from '@expo/vector-icons';
