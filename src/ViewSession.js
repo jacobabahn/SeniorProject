@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native"
 const ViewSession = ({ route }) => {
     const [sessionData, setSessionData] = useState()
     const [isLoading, setIsLoading] = useState(true)
+    const [postId, setPostId] = useState()
     const startDuration = useRef(0)
     const userSession = useContext(UserContext)
     const id = route.params.id
@@ -34,11 +35,33 @@ const ViewSession = ({ route }) => {
     }
 
     const handleDelete = async () => {
+        deletePost()
+
         let id = route.params.id
         let { data: Session, error } = await supabase
             .from('Session')
             .delete()
             .match({ id: id })
+    }
+
+    const deletePost = async () => {
+        getPostId()
+
+        let id = route.params.id
+
+        let { data: Post, error } = await supabase
+            .from('Post')
+            .delete()
+            .match({ session_id: id })
+    }
+
+    const getPostId = async () => {
+        let { data: Post, error } = await supabase
+            .from('Post')
+            .select('id')
+            .eq('session_id', id)
+        if (Post.length > 0)
+            setPostId(Post[0].id)
     }
 
     const handleTime = (time) => {

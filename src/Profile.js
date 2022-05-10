@@ -13,6 +13,7 @@ const Profile = () => {
     const [profileData, setProfileData] = useState()
     const postCount = useRef()
     const friendCount = useRef()
+    const requestCount = useRef()
     const [sessionCount, setSessionCount] = useState()
     const userSession = useContext(UserContext)
     const navigation = useNavigation()
@@ -34,6 +35,7 @@ const Profile = () => {
     const getStats = () => {
         getPostCount()
         getFriendCount()
+        getRequestCount()
         getSessionCount()
     }
 
@@ -53,6 +55,15 @@ const Profile = () => {
             .eq('user_id', userSession.user.id)
         
         friendCount.current = Friend.length
+    }
+
+    const getRequestCount = async () => {
+        let { data: FriendRequest, error } = await supabase
+            .from('FriendRequest')
+            .select('*')
+            .eq('user_id', userSession.user.id)
+
+        requestCount.current = FriendRequest.length
     }
 
     const getSessionCount = async () => {
@@ -123,7 +134,7 @@ const Profile = () => {
                         <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">{friendCount.current}</Text>
                         <TouchableOpacity onPress={requests} style={styles.button}>
                             <Text color="white" fontSize="xl" pt="2" pb="1" mx="2">Friend Requests: </Text>
-                            <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">0</Text>
+                            <Text color="dark.500" fontSize="lg" mx="3" mt="0.5">{requestCount.current}</Text>
                         </TouchableOpacity>
                     </Box>
                 </Box>
