@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native"
  * This is the timer component where the main Pomodoro timer interface is rendered.
  */
 const Pomodoro = () => {
-    const defaulTime = useRef(25 * 60)
+    const defaulTime = useRef(1 * 60)
     const breakTime = useRef(5 * 60)
     const isStarted = useRef(false)
     const isBreak = useRef(false)
@@ -23,9 +23,7 @@ const Pomodoro = () => {
                 if (isRunning && time > 0) {
                     setTime(time => time - 1)
                     totTime.current += 1
-                } else if (time === 0) {
-                    // handleReset()
-                }
+                } else if (time === 0) {}
             }, 1000);
             return () => clearInterval(interval);
         }, [isRunning, time])
@@ -61,18 +59,8 @@ const Pomodoro = () => {
 
     const handleBreakStart = () => {
         setTime(breakTime.current)
-        return (
-            <Box h="100%" w="100%">
-                <Center>
-                    <Text style={style.time} mt="45%" fontSize="8xl" color="white">{minutes}:{seconds}</Text>
-                </Center>
-                {/* <Progress colorScheme="info" size="lg" m="6" value={Math.abs(100 - (time / (breakMin * 60) * 100))} /> */}
-                <Box style={style.buttons}>
-                    {!isRunning || !isStarted.current ? <Button bg="info.700" rounded="2xl" w="30%" onPress={handleButton}>Start</Button> :
-                                                        <Button bg="info.700" rounded="2xl" w="30%" onPress={handleButton}>Pause</Button>}
-                </Box>
-            </Box>
-        )
+        console.log(breakMin," ", time)
+        handlePomodoroStart()
     }
 
     const handleEndSession = () => {
@@ -99,14 +87,15 @@ const Pomodoro = () => {
             )
         )
     }
-
+ 
     const handlePomodoroStart = () => {
         return (
             <Box h="100%" w="100%">
                 <Center>
                     <Text style={style.time} mt="45%" fontSize="8xl" color="white">{minutes}:{seconds}</Text>
                 </Center>
-                <Progress colorScheme="info" size="lg" m="6" value={Math.abs(100 - (time / (startMin * 60) * 100))} />
+                {isBreak.current ? <Progress colorScheme="info" size="lg" m="6" value={Math.abs(100 - (time / (breakMin * 60) * 100))} /> :  
+                                   <Progress colorScheme="info" size="lg" m="6" value={Math.abs(100 - (time / (startMin * 60) * 100))} />}
                 <Box style={style.buttons}>
                     {!isRunning || !isStarted.current ? <Center w="100%">
                                                             <Button bg="info.700" m="6" rounded="2xl" w="30%" onPress={handleButton}>Start</Button> 

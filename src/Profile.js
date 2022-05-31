@@ -139,7 +139,7 @@ const Profile = () => {
                     </Box>
                 </Box>
             </Box>
-            <Button mt="3" w="35%" ml="58%" onPress={logOut}>Log Out</Button>
+            <Button m="3" ml="57%" bg="info.700" rounded="2xl" w="30%" onPress={logOut}>Log Out</Button>
         </Box>
     )
 }
